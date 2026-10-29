@@ -174,15 +174,11 @@ def render_tab_problem(state: dict) -> None:
     alternatif = state.get("alternatif", [])
     alt_text_default = "\n".join(alternatif)
 
-    # Sinkronisasi dengan session state jika berubah dari Tab 2
-    if "input_alternatif" in st.session_state and set(st.session_state["input_alternatif"].split("\n")) != set(alternatif):
-        st.session_state["input_alternatif"] = alt_text_default
-
     alt_input = st.text_area(
         "Daftar Alternatif (satu nama per baris)",
         value=alt_text_default,
         height=120,
-        key="input_alternatif",
+        key=f"input_alternatif_{state.get('alt_version', 0)}",
         placeholder="mis.\nWilayah Barat\nWilayah Timur\nWilayah Pusat\nWilayah Selatan",
     )
     alt_list = [a.strip() for a in alt_input.split("\n") if a.strip()]
@@ -194,5 +190,6 @@ def render_tab_problem(state: dict) -> None:
     else:
         st.success(f"✅ {len(alt_list)} alternatif terdaftar.")
 
-    if alt_list:
+    if alt_list and alt_list != state.get("alternatif"):
         state["alternatif"] = alt_list
+        state["_last_alts"] = list(alt_list)

@@ -216,8 +216,8 @@ def render_tab_data(state: dict) -> None:
 
                     state["alternatif"] = new_alts
                     state["matriks_raw"] = matriks_uploaded
-                    if "input_alternatif" in st.session_state:
-                        st.session_state["input_alternatif"] = "\n".join(new_alts)
+                    state["_last_alts"] = list(new_alts)
+                    state["alt_version"] = state.get("alt_version", 0) + 1
                     st.success(f"✅ Berhasil memuat {len(new_alts)} baris alternatif dari file!")
                     st.rerun()
 
@@ -321,8 +321,9 @@ def render_tab_data(state: dict) -> None:
 
         state["alternatif"] = deduped_alts
         state["matriks_raw"] = matriks_numeric
-        if "input_alternatif" in st.session_state:
-            st.session_state["input_alternatif"] = "\n".join(deduped_alts)
+        if deduped_alts != state.get("_last_alts"):
+            state["_last_alts"] = list(deduped_alts)
+            state["alt_version"] = state.get("alt_version", 0) + 1
 
         # Tampilkan jika ada kolom turunan
         if kolom_turunan:
