@@ -1,0 +1,31 @@
+{
+  "nama_kasus": "Prioritas Wilayah Superstore",
+  "pengambil_keputusan": "Kelompok 2",
+  "tujuan": "Menentukan prioritas wilayah berdasarkan performa bisnis Superstore 2020-2023",
+  "sumber_data": "Dashboard Analysis of Superstore (Tableau), Jan 2020 – Des 2023",
+  "alternatif": ["West", "East", "Central", "South"],
+  "kriteria": [
+    {"kode": "C1", "nama": "Sales", "tipe": "Benefit", "bobot_input": 20, "alasan": "Skala bisnis wilayah"},
+    {"kode": "C2", "nama": "Profit", "tipe": "Benefit", "bobot_input": 30, "alasan": "Fokus utama rekomendasi: profitabilitas"},
+    {"kode": "C3", "nama": "Profit Ratio (%)", "tipe": "Benefit", "bobot_input": 25, "alasan": "Efisiensi margin; Central rugi -25,9%"},
+    {"kode": "C4", "nama": "Sales per Customer", "tipe": "Benefit", "bobot_input": 10, "alasan": "Nilai per pelanggan"},
+    {"kode": "C5", "nama": "Quantity", "tipe": "Benefit", "bobot_input": 5, "alasan": "Volume penjualan"},
+    {"kode": "C6", "nama": "Jumlah Pelanggan", "tipe": "Benefit", "bobot_input": 10, "alasan": "Basis pelanggan / retensi"}
+  ],
+  "matriks": {
+    "C1": {"West": 107483, "East": 41705, "Central": 14007, "South": 17309},
+    "C2": {"West": 19663, "East": 4985, "Central": -3634, "South": 2219},
+    "C3": {"West": null, "East": null, "Central": null, "South": null},
+    "C4": {"West": null, "East": null, "Central": null, "South": null},
+    "C5": {"West": 1898, "East": 543, "Central": 350, "South": 262},
+    "C6": {"West": 170, "East": 41, "Central": 37, "South": 24}
+  },
+  "kolom_turunan": {
+    "C3": "C2 / C1 * 100",
+    "C4": "C1 / C6"
+  },
+  "nilai_pengganti": 0.01,
+  "strategi_zero": "ganti",
+  "metode": "WP",
+  "catatan": "Preset ini mereproduksi hasil file SPK_WP_Superstore_Kelompok2.xlsx. Profit Ratio dan Sales per Customer adalah kolom turunan."
+}

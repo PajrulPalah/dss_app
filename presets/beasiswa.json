@@ -1,0 +1,28 @@
+{
+  "nama_kasus": "Seleksi Penerima Beasiswa",
+  "pengambil_keputusan": "Komite Beasiswa",
+  "tujuan": "Menentukan penerima beasiswa berdasarkan prestasi dan kondisi ekonomi",
+  "sumber_data": "Data pendaftar beasiswa semester ganjil 2024",
+  "alternatif": ["Andi", "Bunga", "Citra", "Dimas", "Eka"],
+  "kriteria": [
+    {"kode": "C1", "nama": "IPK", "tipe": "Benefit", "bobot_input": 0.35, "alasan": "Prestasi akademik utama"},
+    {"kode": "C2", "nama": "Penghasilan OT (juta/bln)", "tipe": "Cost", "bobot_input": 0.30, "alasan": "Penghasilan lebih rendah = lebih membutuhkan"},
+    {"kode": "C3", "nama": "Jumlah Tanggungan", "tipe": "Benefit", "bobot_input": 0.15, "alasan": "Tanggungan lebih banyak = lebih membutuhkan"},
+    {"kode": "C4", "nama": "Prestasi Non-Akademik (1-5)", "tipe": "Benefit", "bobot_input": 0.20, "alasan": "Kontribusi dan potensi mahasiswa"}
+  ],
+  "matriks": {
+    "C1": {"Andi": 3.85, "Bunga": 3.45, "Citra": 3.80, "Dimas": 3.40, "Eka": 3.90},
+    "C2": {"Andi": 6.0, "Bunga": 2.5, "Citra": 4.0, "Dimas": 1.8, "Eka": 7.5},
+    "C3": {"Andi": 2, "Bunga": 4, "Citra": 3, "Dimas": 5, "Eka": 1},
+    "C4": {"Andi": 4, "Bunga": 3, "Citra": 5, "Dimas": 2, "Eka": 4}
+  },
+  "kolom_turunan": {},
+  "nilai_pengganti": 0.01,
+  "strategi_zero": "ganti",
+  "metode": "SAW",
+  "skenario_sensitivitas": [
+    {"nama": "Bobot Awal", "bobot_input": [0.35, 0.30, 0.15, 0.20]},
+    {"nama": "Prioritas Ekonomi (Penghasilan 50%)", "bobot_input": [0.175, 0.50, 0.075, 0.10]}
+  ],
+  "catatan": "Skenario 'Prioritas Ekonomi' dibuat dengan memproporsionalkan bobot lain saat bobot C2 = 0.50."
+}
