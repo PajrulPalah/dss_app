@@ -83,7 +83,7 @@ def _terapkan_preset(state: dict, nama_preset: str) -> None:
         state["pengambil_keputusan"] = ""
         state["tujuan"] = ""
         state["sumber_data"] = ""
-        state["alternatif"] = ["A1", "A2", "A3"]
+        state["alternatif"] = ["Alternatif 1", "Alternatif 2", "Alternatif 3", "Alternatif 4"]
         state["kriteria_list"] = [
             Criterion("C1", "Kriteria 1", BENEFIT, 1.0),
             Criterion("C2", "Kriteria 2", BENEFIT, 1.0),
@@ -189,7 +189,7 @@ def _init_state() -> dict:
             "pengambil_keputusan": "",
             "tujuan": "",
             "sumber_data": "",
-            "alternatif": ["A1", "A2", "A3"],
+            "alternatif": ["Alternatif 1", "Alternatif 2", "Alternatif 3", "Alternatif 4"],
             "kriteria_list": [
                 Criterion("C1", "Kriteria 1", BENEFIT, 1.0),
                 Criterion("C2", "Kriteria 2", BENEFIT, 1.0),

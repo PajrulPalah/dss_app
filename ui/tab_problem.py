@@ -168,24 +168,31 @@ def render_tab_problem(state: dict) -> None:
 
     # ---- DAFTAR ALTERNATIF ----
     st.markdown("### 🏢 Alternatif")
-    st.caption("Satu nama per baris. Nama harus unik.")
+    st.caption("Daftar objek yang dinilai/dirangking (misal Wilayah, Produk, Vendor, Karyawan, dll.).")
+    st.info("💡 **Fleksibel:** Anda bisa mengisi daftar alternatif di sini (satu nama per baris) **ATAU** langsung menambahkannya di tabel **Tab 2 (Data)** tanpa batas baris.")
 
     alternatif = state.get("alternatif", [])
-    alt_text = "\n".join(alternatif)
+    alt_text_default = "\n".join(alternatif)
+
+    # Sinkronisasi dengan session state jika berubah dari Tab 2
+    if "input_alternatif" in st.session_state and set(st.session_state["input_alternatif"].split("\n")) != set(alternatif):
+        st.session_state["input_alternatif"] = alt_text_default
+
     alt_input = st.text_area(
         "Daftar Alternatif (satu nama per baris)",
-        value=alt_text,
+        value=alt_text_default,
         height=120,
         key="input_alternatif",
-        placeholder="mis.\nWest\nEast\nCentral\nSouth",
+        placeholder="mis.\nWilayah Barat\nWilayah Timur\nWilayah Pusat\nWilayah Selatan",
     )
     alt_list = [a.strip() for a in alt_input.split("\n") if a.strip()]
 
     if len(alt_list) < 2:
-        st.error("❌ Minimal 2 alternatif diperlukan.")
+        st.warning("⚠️ Minimal 2 alternatif diperlukan (bisa juga ditambahkan di Tab 2).")
     elif len(set(alt_list)) < len(alt_list):
         st.error("❌ Nama alternatif harus unik. Terdapat duplikat.")
     else:
         st.success(f"✅ {len(alt_list)} alternatif terdaftar.")
 
-    state["alternatif"] = alt_list
+    if alt_list:
+        state["alternatif"] = alt_list
